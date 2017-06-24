@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reminal_Report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fe3b22c0-325b-4834-939e-fa94176fe865">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table_data" uuid="7c572641-b9b9-48b2-816e-41dbe0c78b84">
+		<queryString>
+			<![CDATA[SELECT Name, Thirty, Seventy, Total, Grade, Remarks, Position FROM
+(SELECT CONCAT(student.lastname,' ',student.firstname,' ',student.middlename) AS 'Name', score.thirty AS 'Thirty', score.seventy AS 'Seventy',
+score.total AS 'Total', score.grade AS 'Grade', score.effort AS 'Remarks', @curRank := IF(@prevRank = score.total, @curRank, @incRank) AS 'Position',
+@incRank := @incRank + 1, @prevRank := score.total FROM student, class,
+score, (SELECT @curRank :=0, @prevRank := NULL, @incRank := 1) r
+WHERE student.studentid = score.studentid AND score.classid = class.classid AND class.classname = '2YI' ORDER BY student.lastname ASC)s;]]>
+		</queryString>
+		<field name="Name" class="java.lang.String"/>
+		<field name="Thirty" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="Seventy" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="Total" class="java.lang.Double">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="Grade" class="java.lang.String">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="Remarks" class="java.lang.String"/>
+		<field name="Position" class="java.lang.Integer">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT Name, Thirty, Seventy, Total, Grade, Remarks, Position FROM
+(SELECT CONCAT(student.firstname,' ',student.middlename,' ',student.lastname) AS 'Name',
+ score.thirty AS 'Thirty', score.seventy AS 'Seventy', score.total AS 'Total', score.grade AS 'Grade',
+ score.effort AS 'Remarks', @curRank := IF(@prevRank = score.total, @curRank, @incRank) AS
+'Position', @incRank := @incRank + 1, @prevRank := score.total FROM student, class, score,
+(SELECT @curRank :=0, @prevRank := NULL, @incRank := 1) r
+ WHERE student.studentid = score.studentid  AND score.classid = class.classid ORDER BY
+score.total DESC)s;]]>
+	</queryString>
+	<field name="Name" class="java.lang.String"/>
+	<field name="Thirty" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Seventy" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Total" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Position" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Grade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Remarks" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="91" splitType="Stretch">
+			<staticText>
+				<reportElement x="119" y="0" width="323" height="33" uuid="a6d14c77-6266-401c-8110-76a0357276c7"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[ADA SENIOR HIGH SCHOOL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="119" y="53" width="323" height="16" uuid="4f2ea190-25fd-4502-ac79-9ac4def6b210"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[END OF FIRST TERM EXAMINATION  REPORT SHEET]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="119" y="33" width="323" height="20" uuid="7cba4a14-29ec-40e8-8699-0259d0bf9781"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[INFORMATION AND COMMUNICATIONS TECHNOLOGY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="69" width="53" height="20" uuid="b6ae5845-86ec-4db4-8ff5-c060bd3c61da"/>
+				<text><![CDATA[Class: 2YI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="69" width="75" height="20" uuid="e4edee72-2c1e-44de-8d5c-fa861d5c7f78"/>
+				<text><![CDATA[No. on Roll: 37]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="126" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+			<componentElement>
+				<reportElement key="table 2" style="table 2" x="39" y="0" width="464" height="125" uuid="871d9632-a8bb-4b61-9004-0e911fc35ec2">
+					<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table_data" uuid="e42d0347-5baf-4ec5-9280-58226c111ae3">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="150" uuid="b2e081bc-de54-43d6-a716-8d6b82ea585d">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="150" height="30" uuid="24d7a7f1-1dee-4ce4-9ce0-d351d93485b9"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Name of Student]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="10" y="0" width="140" height="20" uuid="4b485cd3-a6cb-4df8-a3ae-8214c4b8974e"/>
+								<textFieldExpression><![CDATA[$F{Name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="68" uuid="66f3dba5-7df6-4569-bf00-6780e9694431">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="68" height="30" uuid="7b804e8e-52bc-4df5-bc33-c519972b262e"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Class Score (30%)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="68" height="20" uuid="7f9a1f7d-5e74-4dd4-beb4-be02014f7d63"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{Thirty}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="71" uuid="9955064f-213f-43fa-b4b1-01d24f0495dc">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="2da9a7c0-804f-4cb6-9b2b-ca5a8159e001"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Exam Score (70%)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="20" uuid="3db2266a-ab86-4923-96df-38462bf32285"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{Seventy}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="2c72f720-49b6-4e65-afc9-dbd416bafe93">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="4bd5db3c-2f4d-45bb-8ebf-4e6d0bc69d1a"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="20" uuid="da739cef-81df-48f9-b062-32980f487c87"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="9198fca1-292f-4207-8e2e-da386e762137">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="d0fd78b3-8193-4961-91e7-f0f7702f7fd4"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Position]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="30" rowSpan="1">
+							<textField pattern="">
+								<reportElement x="3" y="0" width="37" height="20" uuid="573de2b8-7814-408a-be8d-46629b4aa98c"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[""+$F{Position}+"/"+37]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="41" uuid="8a6a677c-6574-4561-a22a-bfb49690a0e9">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="1" y="0" width="40" height="30" uuid="98e245ba-1ad1-4cec-8216-d76f4abcde52"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Grade]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="20" uuid="9c53e022-0e36-405c-a6d0-7cbcb07ada44"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{Grade}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="ad9f3b3a-6d37-4ff3-bee4-3d75c13d21c2">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="6ae09955-f0cb-4611-852a-d651b85c1897"/>
+								<textElement textAlignment="Center"/>
+								<text><![CDATA[Remarks]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="20" uuid="d1835c0a-5a63-4cb4-9cc9-a7553c1cd75b"/>
+								<textElement textAlignment="Center"/>
+								<textFieldExpression><![CDATA[$F{Remarks}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>
